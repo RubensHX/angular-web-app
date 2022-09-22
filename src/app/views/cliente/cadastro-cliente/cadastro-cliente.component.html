@@ -1,0 +1,11 @@
+<form action="">
+  <div>
+    <label for="nomeCliente">Nome</label>
+    <input type="text" name="nomeCliente" id="nomeCliente" placeholder="Nome do cliente" ngControl="nomeCliente">
+  </div>
+  <div>
+    <label for="emailCliente">Email</label>
+    <input type="email" name="emailCliente" id="emailCliente" placeholder="Email do cliente" ngControl="emailCliente">
+  </div>
+  <button (click) = "salvarCliente()" type="button" *ngIf="emailCliente != '' && nomeCliente != ''">Salvar</button>
+</form>
