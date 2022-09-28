@@ -8,25 +8,28 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class CadastroClienteComponent implements OnInit {
 
-
+  listaClientes = new Array<Cliente>();
   nomeCliente: string = '';
   emailCliente: string = '';
 
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    this.lerCliente();
   }
 
   salvarCliente(): void {
     alert(`Cliente ${this.nomeCliente} salvo com sucesso! um email de confirmação foi enviado para ${this.emailCliente}`);
   }
 
-  letCliente() {
+  lerCliente() {
+    this.listaClientes = [];
     var observable = this.clienteService.getAll();
-    observable.subscribe(listaCliente => {
-      const entries = Object.entries(listaCliente);
+    observable.subscribe(l => {
+      const entries = Object.entries(l);
       entries.forEach(entry => {
         alert(entry)
+        this.listaClientes.push(entry)
       })
     })
   }
