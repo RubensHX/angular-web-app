@@ -3,7 +3,7 @@
   <h2>Listagens de clientes</h2>
   <div class="row">
     <div *ngFor="let cliente of listaClientes">
-        {{cliente.nome}} | {{cliente.cpf}} | {{cliente.cep}}
+        {{cliente.nome}} | {{cliente.cpf}} | {{cliente.cep}} | <a routerLink="/cadastro-cliente/{{cliente.id}}">Editar</a>
     </div>
   </div>
   <button type="button" routerLink="/cadastroCliente">Novo</button>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -6,32 +8,28 @@ import { ClienteService } from 'src/app/services/cliente.service';
   templateUrl: './cadastro-cliente.component.html',
   styleUrls: ['./cadastro-cliente.component.css']
 })
-export class CadastroClienteComponent implements OnInit {
+export class CadastroClienteComponent implements OnInit, OnDestroy {
+  cliente = new Cliente();
+  sub!: any;
+  id!: string;
+  titulo: string = 'Cadastro de Cliente';
 
-  listaClientes = new Array<Cliente>();
-  nomeCliente: string = '';
-  emailCliente: string = '';
+  constructor(private clienteService: ClienteService, private route: ActivatedRoute) {}
 
-  constructor(private clienteService: ClienteService) { }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
   ngOnInit(): void {
-    this.lerCliente();
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    if (this.id) {
+      this.titulo = 'Edição de Cliente';
+    }
   }
 
   salvarCliente(): void {
-    alert(`Cliente ${this.nomeCliente} salvo com sucesso! um email de confirmação foi enviado para ${this.emailCliente}`);
-  }
-
-  lerCliente() {
-    this.listaClientes = [];
-    var observable = this.clienteService.getAll();
-    observable.subscribe(l => {
-      const entries = Object.entries(l);
-      entries.forEach(entry => {
-        alert(entry)
-        this.listaClientes.push(entry)
-      })
-    })
+    alert(`Cliente ${this.cliente.nome} salvo com sucesso!`);
   }
 
 }

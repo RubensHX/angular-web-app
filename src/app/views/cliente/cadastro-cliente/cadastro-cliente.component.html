@@ -1,11 +1,16 @@
+<h1>{{titulo}}</h1>
 <form action="">
   <div>
     <label for="nomeCliente">Nome</label>
-    <input type="text" name="nomeCliente" id="nomeCliente" placeholder="Nome do cliente" ngControl="nomeCliente">
+    <input type="text" name="nomeCliente" id="nomeCliente" placeholder="Nome do cliente" [(ngModel)]="cliente.nome">
   </div>
   <div>
-    <label for="emailCliente">Email</label>
-    <input type="email" name="emailCliente" id="emailCliente" placeholder="Email do cliente" ngControl="emailCliente">
+    <label for="cpfCliente">CPF</label>
+    <input type="text" name="cpfCliente" id="cpfCliente" placeholder="CPF do cliente" [(ngModel)]="cliente.cpf">
   </div>
-  <button (click) = "salvarCliente()" type="button" *ngIf="emailCliente != '' && nomeCliente != ''">Salvar</button>
+  <div>
+    <label for="enderecoCliente">Endereço</label>
+    <input type="text" name="enderecoCliente" id="enderecoCliente" placeholder="Endereço do cliente" [(ngModel)]="cliente.endereco">
+  </div>
+  <button (click) = "salvarCliente()" type="button">Salvar</button>
 </form>
